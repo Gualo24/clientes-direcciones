@@ -31,16 +31,7 @@ bld/
 [Ll]og/
 [Ll]ogs/
 node_modules/
-.expo/
-dist/
-npm-debug.*
-*.jks
-*.p8
-*.p12
-*.key
-*.mobileprovision
-*.orig.*
-web-build/
+.expo/web/cache/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

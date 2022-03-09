@@ -43,7 +43,28 @@ namespace backend.Controllers
         {
             try
             {
-                var cliente = await _context.Clientes.FirstOrDefaultAsync(x => !x.Eliminado && x.IdCliente == id);
+                var cliente = await _context.Clientes
+                    .Select(x => new
+                    {
+                        x.IdCliente,
+                        x.Eliminado,
+                        x.Nombres,
+                        x.Apellidos,
+                        x.Telefono,
+                        x.CorreoElectronico,
+                        Direcciones = x.Direcciones
+                            .Where(n => !n.Eliminado)
+                            .Select(d => new
+                            {
+                                d.IdDireccion,
+                                d.Referencia,
+                                d.Detalle,
+                                d.IdProvincia,
+                                Provincia = d.Provincia.ProvinciaNombre,
+                                d.IdMunicipio,
+                                Municipio = d.Municipio.MunicipioNombre
+                            })
+                    }).FirstOrDefaultAsync(x => !x.Eliminado && x.IdCliente == id);
 
                 if (cliente == null || cliente.IdCliente == 0)
                     return BadRequest("No fue posible encontrar este cliente");
