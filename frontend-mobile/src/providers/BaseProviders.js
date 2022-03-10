@@ -1,7 +1,7 @@
 import axios from "axios";
 import Response from "../utils/Response";
 
-const BaseUrl = "https://localhost:44379/";
+const BaseUrl = "https://clientes-direcciones.azurewebsites.net/";
 
 async function apiGet({ controller }) {
     try {

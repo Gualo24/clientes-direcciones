@@ -14,7 +14,6 @@ namespace backend.DTOs
             public int IdMunicipio { get; set; }
             public string Referencia { get; set; }
             public string Detalle { get; set; }
-            public string Georeferencia { get; set; }
         }
 
         public class DireccionUpdate

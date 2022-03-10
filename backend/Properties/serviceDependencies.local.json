@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/servsql01/databases/clientes-direcciones",
+      "type": "mssql.azure",
+      "connectionId": "sqlconn",
+      "secretStore": "LocalSecretsFile"
+    }
+  }
+}

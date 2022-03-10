@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Box, FlatList, Heading, Avatar, HStack, VStack, Text, Spacer, Pressable, Center, NativeBaseProvider } from "native-base";
+import { Box, FlatList, Heading, Avatar, HStack, VStack, Text, Spacer, Pressable, Center, NativeBaseProvider, Alert } from "native-base";
 import { ProvidersClienteGetAll } from "../providers/Cliente_Providers";
 
 import { useFocusEffect } from '@react-navigation/native';
-import { } from 'react/cjs/react.production.min';
 
 
 export default function ClientesPage({ navigation, route }) {
@@ -13,22 +12,21 @@ export default function ClientesPage({ navigation, route }) {
 
   useEffect(() => {
     GetClientes()
-  }, [GetClientes])
+  }, [])
 
   useFocusEffect(
-    React.useCallback(() => {
-      return () => {
-        GetClientes()
-      };
+    React.useCallback(async () => {
+      await GetClientes()
+      return  () => {   };
     }, [])
   );
-
-
 
   async function GetClientes() {
     const rst = await ProvidersClienteGetAll();
     if (rst.isSuccess) {
       setclientes(rst.result)
+    }else{
+
     }
   }
 
@@ -40,7 +38,7 @@ export default function ClientesPage({ navigation, route }) {
         </Heading>
         <FlatList data={clientes} renderItem={({
           item
-        }) => <Pressable key={item.idCliente} onPress={() => { navigation.navigate('cliente', { idCliente: item.idCliente }) }}>
+        }) => <Pressable key={item.idCliente}  onPress={() => { navigation.navigate('cliente', { idCliente: item.idCliente }) }}>
             <Box borderBottomWidth="1" _dark={{
               borderColor: "gray.600"
             }} borderColor="coolGray.200" pl="4" pr="5" py="2">

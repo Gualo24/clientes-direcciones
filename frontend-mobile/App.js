@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ClientesPage from "./src/pages/ClientesPage";
 import ClientePage from "./src/pages/ClientePage";
 import ClienteCrearPage from "./src/pages/ClienteCrearPage";
+import DireccionCrearPage from "./src/pages/DireccionCrearPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ export default function App() {
           />
           <Stack.Screen name="cliente" component={ClientePage} />
           <Stack.Screen name="crear-cliente" component={ClienteCrearPage} />
+          <Stack.Screen name="crear-direccion" component={DireccionCrearPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

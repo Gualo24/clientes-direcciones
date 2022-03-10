@@ -61,7 +61,7 @@ namespace backend.Controllers
         }
 
         [HttpPost("Post")]
-        public async Task<IActionResult> Post([FromQuery] DTOs.Direccion.DireccionCreate model)
+        public async Task<IActionResult> Post([FromBody] DTOs.Direccion.DireccionCreate model)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace backend.Controllers
                     IdMunicipio = model.IdMunicipio,
                     Referencia = model.Referencia,
                     Detalle = model.Detalle,
-                    Georeferencia = model.Georeferencia,
+                    Georeferencia = "00000000-000000000",
                 };
 
                 await _context.Direcciones.AddAsync(direccion);
@@ -126,6 +126,38 @@ namespace backend.Controllers
 
                 await _context.SaveChangesAsync();
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetProvincias")]
+        public async Task<IActionResult> GetProvincias()
+        {
+            try
+            {
+                var provincias = await _context.Provincias.ToListAsync();
+
+                return Ok(provincias);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetMunicipios")]
+        public async Task<IActionResult> GetMunicipios([FromQuery] int id)
+        {
+            try
+            {
+                var municipios = await _context.Municipios.Where(x=> x.IdProvincia == id).ToListAsync();
+
+                return Ok(municipios);
             }
             catch (Exception ex)
             {

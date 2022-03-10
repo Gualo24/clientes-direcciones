@@ -63,7 +63,7 @@ export default function ClienteCrearPage({ navigation, route }) {
                             onChangeText={value => setData({ ...formData, telefono: value })} />
                     </FormControl>
                     <Button onPress={onSubmit} mt="5" colorScheme="cyan">
-                        Crear cliente
+                        Submit
                     </Button>
                 </VStack>
             </Center>
